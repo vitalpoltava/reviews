@@ -13,3 +13,5 @@ Usage
 ---
 
 `npm start`
+
+and run in browser `http://localhost:3000`

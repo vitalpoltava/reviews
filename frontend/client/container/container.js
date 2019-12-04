@@ -7,6 +7,6 @@ const ClientContainer = () =>
     <div className="card-body">
       <ClientList />
     </div>
-  </div>
+  </div>;
 
 export default ClientContainer;

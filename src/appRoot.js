@@ -1,8 +1,8 @@
 import React from 'react';
 
-const AppRoot = () =>
+const App = () =>
   <div className="admin">
     2020
   </div>;
 
-export default AppRoot;
+export default App;

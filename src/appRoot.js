@@ -5,6 +5,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import ClientContainer from './client/container/container';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -23,7 +25,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className={'h-100'}>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <ul className="navbar-nav">
               <li className={"nav-item " + (this.state.activeMenuItem === 'home' && 'active')} data-name="home" onClick={this.setHomeNavItemActive}>
@@ -50,7 +52,7 @@ class App extends React.Component {
 }
 
 function Home() {
-  return <h2>Home</h2>;
+  return <ClientContainer />;
 }
 
 function Admin() {

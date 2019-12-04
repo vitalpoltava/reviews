@@ -1,0 +1,14 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+.center {
+    position: relative;
+    top: 10%;
+    transform: translateY(-10%);
+    margin: auto;
+}

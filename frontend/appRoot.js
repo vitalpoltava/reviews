@@ -43,7 +43,7 @@ class App extends React.Component {
               <h2>Admin</h2>
             </Route>
             <Route path="/">
-              <ClientContainer />;
+              <ClientContainer />
             </Route>
           </Switch>
         </div>

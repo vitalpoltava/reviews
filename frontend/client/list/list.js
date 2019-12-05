@@ -1,57 +1,39 @@
 import React from 'react';
-import Client from './../constants'
 
-class ClientList extends React.Component {
+class ReviewsList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      items: []
-    };
   }
 
-  componentDidMount() {
-    fetch(`${Client.listUrl}${Client.userId}`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
-  }
+  deleteClick = (id) => {
+    this.props.deleteHandler(id);
+  };
 
   render() {
-    const { error, isLoaded, items } = this.state;
-    if (error) {
-      return <div className={'bg-danger text-center p-2'}>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    } else {
-      if (items && items.length) {
-        return (
-          <ul>
-            {items.map(item => (
-              <li key={item.name}>
-                {item.name} {item.price}
-              </li>
-            ))}
-          </ul>
-        );
-      } else {
-        return <div className={'bg-warning text-center p-2'}>List is empty!</div>;
-      }
-    }
+    const that = this;
+    const items = this.props.list || [];
+
+    return (
+      <div>
+        <div>
+          <div className={'row mb-2 font-weight-bold'}>
+            <div className={'col-6'}>Title</div>
+            <div className={'col-4'}>For user</div>
+            <div className={'col-2'}>&nbsp;</div>
+          </div>
+        </div>
+        {items.map(function (item, index) {
+          return <div className={'row mb-2'} key={item.id}>
+              <div className={'col-6'}>{item.name}</div>
+              <div className={'col-4'}>{item.reviewedUser}</div>
+              <div className={'col-2'}>
+                <button onClick={that.deleteClick.bind(this, item.id)}>Delete</button>
+              </div>
+            </div>;
+        })}
+      </div>
+    )
   }
 }
 
-export default ClientList;
+export default ReviewsList;

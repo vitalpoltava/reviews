@@ -40,24 +40,16 @@ class App extends React.Component {
 
           <Switch>
             <Route path="/admin">
-              <Admin />
+              <h2>Admin</h2>
             </Route>
             <Route path="/">
-              <Home />
+              <ClientContainer />;
             </Route>
           </Switch>
         </div>
       </Router>
     );
   }
-}
-
-function Home() {
-  return <ClientContainer />;
-}
-
-function Admin() {
-  return <h2>Admin</h2>;
 }
 
 export default App;

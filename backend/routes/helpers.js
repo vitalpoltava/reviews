@@ -2,6 +2,19 @@
 let users = require('./data/users');
 let reviews = require('./data/reviews');
 
+const selectAllUsers = () => {
+  return users;
+};
+
+const addUser = (request) => {
+  if (!request || !request.name) {
+    return false;
+  }
+  const uuid = `f${(+new Date).toString(16)}`;
+  users.push({id: uuid, name: request.name});
+  return uuid;
+};
+
 const selectUserReviews = (uid) => {
   const selected = !uid ? [] : reviews.filter(item => item.userId === uid);
   return selected.map(review => {
@@ -19,4 +32,5 @@ const deleteReview = (uid, reviewId) => {
 module.exports = {
   selectUserReviews,
   deleteReview,
+  selectAllUsers,
 };

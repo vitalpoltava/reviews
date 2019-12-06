@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from "react-bootstrap/Button";
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -23,11 +24,11 @@ class ReviewsList extends React.Component {
           </div>
         </div>
         {items.map(function (item, index) {
-          return <div className={'row mb-2'} key={item.id}>
+          return <div className={'row align-items-center mb-2'} key={item.id}>
               <div className={'col-6'}>{item.name}</div>
               <div className={'col-4'}>{item.reviewedUser}</div>
               <div className={'col-2'}>
-                <button onClick={that.deleteClick.bind(this, item.id)}>Delete</button>
+                <Button variant={'outline-danger'} onClick={that.deleteClick.bind(this, item.id)}>Delete</Button>
               </div>
             </div>;
         })}

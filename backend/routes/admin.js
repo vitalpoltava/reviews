@@ -8,8 +8,13 @@ router.get('/admin/users', function(req, res, next) {
 });
 
 router.post('/admin/users', function(req, res, next) {
-  const userId = Helpers.createUser(req.body);
+  const userId = Helpers.addUser(req.body);
   userId ? res.status(202).send({id: userId}) : res.status(403).send({message: 'Cannot create user'});
+});
+
+router.delete('/admin/users/:id', function(req, res, next) {
+  const userId = Helpers.deleteUser(req.params.id);
+  userId ? res.status(202).send({id: userId}) : res.status(403).send({message: 'Cannot delete user'});
 });
 
 

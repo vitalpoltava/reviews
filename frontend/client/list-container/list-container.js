@@ -1,7 +1,7 @@
 import React from 'react';
 import ConfirmModal from '../../common/confirm/confirm';
 import ReviewsList from './../list/list';
-import Client from './../constants'
+import { Client } from './../constants'
 
 class ClientListContainer extends React.Component {
   constructor(props) {
@@ -22,10 +22,8 @@ class ClientListContainer extends React.Component {
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result
-          });
+          this.setState({isLoaded: true});
+          type === 'get' && this.setState({items: result});
         },
         (error) => {
           this.setState({
@@ -74,7 +72,7 @@ class ClientListContainer extends React.Component {
           <ConfirmModal
             show={this.state.showDeleteConfirmation}
             onHide={this.confirmDelete}
-            confirmLabel={'Delete'}
+            confirmLabel={'Delete review'}
             bodyText={'Confirm review delete?'}
             buttonType={'danger'}
           />

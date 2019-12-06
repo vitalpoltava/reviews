@@ -12,7 +12,7 @@ class ClientContainer extends React.Component {
   };
 
   render() {
-    return <div className="center card">
+    return <div className="center20 card client-container">
       <div className="card-body">
         <ClientListContainer deleteHandler={this.deleteHandler} />
       </div>

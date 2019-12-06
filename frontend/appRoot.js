@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import ClientContainer from './client/container/container';
+import AdminContainer from './admin/container/container';
 import './App.css';
 
 class App extends React.Component {
@@ -40,7 +41,7 @@ class App extends React.Component {
 
           <Switch>
             <Route path="/admin">
-              <h2>Admin</h2>
+              <AdminContainer />
             </Route>
             <Route path="/">
               <ClientContainer />

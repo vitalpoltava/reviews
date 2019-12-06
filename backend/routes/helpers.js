@@ -7,12 +7,21 @@ const selectAllUsers = () => {
 };
 
 const addUser = (request) => {
-  if (!request || !request.name) {
+  if (!request.name) {
     return false;
   }
   const uuid = `f${(+new Date).toString(16)}`;
   users.push({id: uuid, name: request.name});
   return uuid;
+};
+
+const deleteUser = (id) => {
+  const index = users.findIndex(user => user.id === id);
+  if (!id || index === -1) {
+    return false;
+  }
+  users.splice(index, 1);
+  return id;
 };
 
 const selectUserReviews = (uid) => {
@@ -33,4 +42,6 @@ module.exports = {
   selectUserReviews,
   deleteReview,
   selectAllUsers,
+  addUser,
+  deleteUser,
 };

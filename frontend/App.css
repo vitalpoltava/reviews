@@ -6,9 +6,20 @@ body {
     margin: 0;
 }
 
-.center {
+.center10 {
     position: relative;
-    top: 10%;
-    transform: translateY(-10%);
+    transform: translateY(10%);
+    margin: auto;
+}
+
+.center20 {
+    position: relative;
+    transform: translateY(20%);
+    margin: auto;
+}
+
+.center30 {
+    position: relative;
+    transform: translateY(30%);
     margin: auto;
 }

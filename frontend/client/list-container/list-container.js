@@ -67,16 +67,18 @@ class ClientListContainer extends React.Component {
       return <div>Loading...</div>;
     } else {
       if (items && items.length) {
-        return <>
-          <ReviewsList list={items} deleteHandler={this.showConfirmationDialog} />
-          <ConfirmModal
-            show={this.state.showDeleteConfirmation}
-            onHide={this.confirmDelete}
-            confirmLabel={'Delete review'}
-            bodyText={'Confirm review delete?'}
-            buttonType={'danger'}
-          />
-        </>;
+        return (
+          <div>
+            <ReviewsList list={items} deleteHandler={this.showConfirmationDialog} />
+            <ConfirmModal
+              show={this.state.showDeleteConfirmation}
+              onHide={this.confirmDelete}
+              confirmLabel={'Delete review'}
+              bodyText={'Confirm review delete?'}
+              buttonType={'danger'}
+            />
+          </div>
+        );
       } else {
         return <div className={'bg-warning text-center p-2'}>{items.message || 'List is empty!'}</div>;
       }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   HashRouter as Router,
   Switch,
@@ -10,47 +10,43 @@ import ClientContainer from './client/container/container';
 import AdminContainer from './admin/container/container';
 import './App.css';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { activeMenuItem: 'home' };
-  }
+function App() {
+  const [activeMenuItem, setActiveMenuItem] = useState('home');
+  
 
-  setHomeNavItemActive = () => {
-    this.setState({ activeMenuItem: 'home' });
+  const setHomeNavItemActive = () => {
+    setActiveMenuItem('home');
   };
 
-  setAdminNavItemActive = () => {
-    this.setState({ activeMenuItem: 'admin' });
+  const setAdminNavItemActive = () => {
+    setActiveMenuItem('admin');
   };
 
-  render() {
-    return (
-      <Router>
-        <div className={'h-100'}>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <ul className="navbar-nav">
-              <li className={"nav-item " + (this.state.activeMenuItem === 'home' && 'active')} onClick={this.setHomeNavItemActive}>
-                <Link className="nav-link" to="/">Home</Link>
-              </li>
-              <li className={"nav-item " + (this.state.activeMenuItem === 'admin' && 'active')} onClick={this.setAdminNavItemActive}>
-                <Link className="nav-link" to="/admin">Admin</Link>
-              </li>
-            </ul>
-          </nav>
+  return (
+    <Router>
+      <div className={'h-100'}>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <ul className="navbar-nav">
+            <li className={"nav-item " + (activeMenuItem === 'home' && 'active')} onClick={setHomeNavItemActive}>
+              <Link className="nav-link" to="/">Home</Link>
+            </li>
+            <li className={"nav-item " + (activeMenuItem === 'admin' && 'active')} onClick={setAdminNavItemActive}>
+              <Link className="nav-link" to="/admin">Admin</Link>
+            </li>
+          </ul>
+        </nav>
 
-          <Switch>
-            <Route path="/admin">
-              <AdminContainer />
-            </Route>
-            <Route path="/">
-              <ClientContainer />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    );
-  }
+        <Switch>
+          <Route path="/admin">
+            <AdminContainer />
+          </Route>
+          <Route path="/">
+            <ClientContainer />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
 }
 
 export default App;

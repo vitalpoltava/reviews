@@ -12,12 +12,11 @@ import './App.css';
 
 function App() {
   const [activeMenuItem, setActiveMenuItem] = useState('home');
-  
 
   const setHomeNavItemActive = () => {
     setActiveMenuItem('home');
   };
-
+  
   const setAdminNavItemActive = () => {
     setActiveMenuItem('admin');
   };

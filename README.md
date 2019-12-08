@@ -1,4 +1,4 @@
-# Server side ReactJS app
+# Server side ReactJS app (boilerplate)
 
 Install
 ---

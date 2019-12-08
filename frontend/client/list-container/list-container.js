@@ -1,32 +1,36 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ConfirmModal from '../../common/confirm/confirm';
 import ReviewsList from './../list/list';
 import { Client } from './../constants'
 
-class ClientListContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      items: [],
-      showDeleteConfirmation: false,
-      reviewDeleteId: false,
-    };
-  }
+function ClientListContainer() {
+  const [state, setState] = useState({
+    error: null,
+    isLoaded: false,
+    items: [],
+    showDeleteConfirmation: false,
+    reviewDeleteId: false,
+  });
 
-  serverActions = (type = 'get', itemId = '') => {
+  const mergeState = (partialState) => setState(prevState => ({
+    ...prevState,
+    ...partialState,
+  }));
+
+  const { error, isLoaded, items } = state;
+
+  const serverActions = (type = 'get', itemId = '') => {
     return fetch(`${Client.listUrl}/${Client.userId}/${itemId}`, {
       method: type
     })
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({isLoaded: true});
-          type === 'get' && this.setState({items: result});
+          mergeState({isLoaded: true});
+          type === 'get' && mergeState({items: result});
         },
         (error) => {
-          this.setState({
+          mergeState({
             isLoaded: true,
             error
           });
@@ -34,54 +38,47 @@ class ClientListContainer extends React.Component {
       )
   };
 
-  componentDidMount() {
-    this.getReviews();
-  }
+  useEffect(() => {
+    getReviews();
+  }, []);
 
-  showConfirmationDialog = (reviewId) => {
-    this.setState({showDeleteConfirmation: true, reviewDeleteId: reviewId});
+  const showConfirmationDialog = (reviewId) => {
+    mergeState({showDeleteConfirmation: true, reviewDeleteId: reviewId});
   };
 
-  confirmDelete = (confirmed) => {
-    this.setState({showDeleteConfirmation: false});
+  const confirmDelete = (confirmed) => {
+    mergeState({showDeleteConfirmation: false});
 
     if (confirmed) {
-      return this.deleteReview(this.state.reviewDeleteId)
+      return deleteReview(state.reviewDeleteId)
     }
   };
 
-  /**
-   * Service calls
-   */
+  const deleteReview = (reviewId) => serverActions('delete', reviewId)
+    .then(getReviews);
 
-  deleteReview = (reviewId) => this.serverActions('delete', reviewId)
-    .then(this.getReviews);
+  const getReviews = () => serverActions();
 
-  getReviews = () => this.serverActions();
-
-  render() {
-    const { error, isLoaded, items } = this.state;
-    if (error) {
-      return <div className={'bg-danger text-center p-2'}>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
+  if (error) {
+    return <div className={'bg-danger text-center p-2'}>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    if (items && items.length) {
+      return (
+        <div>
+          <ReviewsList list={items} deleteHandler={showConfirmationDialog} />
+          <ConfirmModal
+            show={state.showDeleteConfirmation}
+            onHide={confirmDelete}
+            confirmLabel={'Delete review'}
+            bodyText={'Confirm review delete?'}
+            buttonType={'danger'}
+          />
+        </div>
+      );
     } else {
-      if (items && items.length) {
-        return (
-          <div>
-            <ReviewsList list={items} deleteHandler={this.showConfirmationDialog} />
-            <ConfirmModal
-              show={this.state.showDeleteConfirmation}
-              onHide={this.confirmDelete}
-              confirmLabel={'Delete review'}
-              bodyText={'Confirm review delete?'}
-              buttonType={'danger'}
-            />
-          </div>
-        );
-      } else {
-        return <div className={'bg-warning text-center p-2'}>{items.message || 'List is empty!'}</div>;
-      }
+      return <div className={'bg-warning text-center p-2'}>{items.message || 'List is empty!'}</div>;
     }
   }
 }

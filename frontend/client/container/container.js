@@ -2,22 +2,18 @@ import React from 'react';
 import './container.css';
 import ClientListContainer from "../list-container/list-container";
 
-class ClientContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  deleteHandler = (reviewId) => {
-    this.props.deleteHandler(reviewId)
+function ClientContainer(props) {
+  const deleteHandler = (reviewId) => {
+    props.deleteHandler(reviewId)
   };
 
-  render() {
-    return <div className="center20 card client-container">
+  return (
+    <div className="center20 card client-container">
       <div className="card-body">
-        <ClientListContainer deleteHandler={this.deleteHandler} />
+        <ClientListContainer deleteHandler={deleteHandler}/>
       </div>
-    </div>;
-  }
+    </div>
+  );
 }
 
 export default ClientContainer;

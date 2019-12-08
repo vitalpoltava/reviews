@@ -68,7 +68,9 @@ class AdminContainer extends React.Component {
       });
   };
 
-  submitUser = () => {
+  submitUser = (e) => {
+    e.preventDefault();
+
     this.setState({isLoading: true});
     this.serverActions('post', {name: this.state.userName})
       .then(() => {
@@ -121,7 +123,7 @@ class AdminContainer extends React.Component {
             <Alert variant="danger" show={this.state.postError} onClose={this.dismissErrors} dismissible>
               <div>Oh snap! You got an error!</div>
             </Alert>
-            <Form>
+            <Form onSubmit={this.submitUser}>
               <Row>
                 <Col sm={9}>
                   <Form.Group className={'m-0'}>
@@ -129,7 +131,6 @@ class AdminContainer extends React.Component {
                       className={'border-0'}
                       value={this.state.userName}
                       onChange={this.updateUserName}
-                      onKe
                       type="text"
                       placeholder="New user's name"/>
                   </Form.Group>

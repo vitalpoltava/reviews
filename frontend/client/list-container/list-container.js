@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ConfirmModal from '../../common/confirm/confirm';
 import ReviewsList from './../list/list';
-import { Client } from './../constants'
+import { Client } from '../../constants'
 
 function ClientListContainer() {
   const [state, setState] = useState({

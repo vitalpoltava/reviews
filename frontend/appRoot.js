@@ -8,17 +8,18 @@ import {
 
 import ClientContainer from './client/container/container';
 import AdminContainer from './admin/container/container';
+import {Links} from './constants';
 import './App.css';
 
 function App() {
-  const [activeMenuItem, setActiveMenuItem] = useState('home');
+  const [activeMenuItem, setActiveMenuItem] = useState(Links.home);
 
   const setHomeNavItemActive = () => {
-    setActiveMenuItem('home');
+    setActiveMenuItem(Links.home);
   };
-  
+
   const setAdminNavItemActive = () => {
-    setActiveMenuItem('admin');
+    setActiveMenuItem(Links.admin);
   };
 
   return (
@@ -26,10 +27,10 @@ function App() {
       <div className={'h-100'}>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <ul className="navbar-nav">
-            <li className={"nav-item " + (activeMenuItem === 'home' && 'active')} onClick={setHomeNavItemActive}>
+            <li className={"nav-item " + (activeMenuItem === Links.home && 'active')} onClick={setHomeNavItemActive}>
               <Link className="nav-link" to="/">Home</Link>
             </li>
-            <li className={"nav-item " + (activeMenuItem === 'admin' && 'active')} onClick={setAdminNavItemActive}>
+            <li className={"nav-item " + (activeMenuItem === Links.admin && 'active')} onClick={setAdminNavItemActive}>
               <Link className="nav-link" to="/admin">Admin</Link>
             </li>
           </ul>

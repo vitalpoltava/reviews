@@ -6,7 +6,7 @@ function ConfirmModal(props) {
   return (
     <Modal {...props} centered>
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Title>
           Confirm action
         </Modal.Title>
       </Modal.Header>

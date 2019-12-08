@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
-import {Admin} from "../../client/constants";
+import {Admin} from "../../constants";
 import UsersList from "../users-list/list";
 import ConfirmModal from "../../common/confirm/confirm";
 
